@@ -1,17 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-
 from pydantic import BaseModel
 from typing import Optional
 
 app = FastAPI(title="Simple CRUD API", version="1.0.0")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # In-memory storage
 items: dict[int, dict] = {}
