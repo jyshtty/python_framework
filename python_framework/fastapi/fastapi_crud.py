@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 app = FastAPI(title="Simple CRUD API", version="1.0.0")
@@ -10,13 +10,13 @@ next_id = 1
 
 
 class ItemCreate(BaseModel):
-    name: str
+    name: str = Field(min_length=5, max_length=10)
     description: Optional[str] = None
     price: float
 
 
 class ItemUpdate(BaseModel):
-    name: Optional[str] = None
+    name: Optional[str] = Field(default=None, min_length=5, max_length=10)
     description: Optional[str] = None
     price: Optional[float] = None
 
