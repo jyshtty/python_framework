@@ -13,16 +13,6 @@ def item_or_404(item_id: int) -> dict:
     return items[item_id]
 
 
-@app.get("/items")
-def list_items():
-    return jsonify([{"id": k, **v} for k, v in items.items()])
-
-
-@app.get("/items/<int:item_id>")
-def get_item(item_id: int):
-    return jsonify({"id": item_id, **item_or_404(item_id)})
-
-
 @app.post("/items")
 def create_item():
     global next_id
@@ -47,6 +37,16 @@ def update_item(item_id: int):
         if field in data and data[field] is not None:
             items[item_id][field] = data[field]
     return jsonify({"id": item_id, **items[item_id]})
+
+
+@app.get("/items")
+def list_items():
+    return jsonify([{"id": k, **v} for k, v in items.items()])
+
+
+@app.get("/items/<int:item_id>")
+def get_item(item_id: int):
+    return jsonify({"id": item_id, **item_or_404(item_id)})
 
 
 @app.delete("/items/<int:item_id>")
