@@ -2,7 +2,7 @@
 Self-contained Django CRUD app (single-file, runnable via: python django_crud.py runserver).
 Uses Django REST Framework with an in-memory SQLite DB.
 
-Install: pip install django djangorestframework django-cors-headers
+Install: pip install django djangorestframework
 """
 import os
 import sys
@@ -18,7 +18,6 @@ if not settings.configured:
             "django.contrib.contenttypes",
             "django.contrib.auth",
             "rest_framework",
-            "corsheaders",
         ],
         DATABASES={
             "default": {
@@ -27,10 +26,8 @@ if not settings.configured:
             }
         },
         MIDDLEWARE=[
-            "corsheaders.middleware.CorsMiddleware",
             "django.middleware.common.CommonMiddleware",
         ],
-        CORS_ALLOWED_ORIGINS=["http://localhost:5173"],
         ROOT_URLCONF=__name__,
         DEFAULT_AUTO_FIELD="django.db.models.BigAutoField",
     )
